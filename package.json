@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "parcel": "latest",
+    "parcel-reporter-static-files-copy": "^1.4.0"
+  },
+  "dependencies": {
+    "flowplayer": "^7.2.7",
+    "jquery": "^3.6.1"
+  }
+}
