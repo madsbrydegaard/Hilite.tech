@@ -1,4 +1,15 @@
 {
+  "name": "hilite.tech",
+  "license": "private",
+  "author": {
+    "name": "Mads Brydegaard",
+    "email": "mb@vidcore.com"
+  },
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
   "devDependencies": {
     "parcel": "latest",
     "parcel-reporter-static-files-copy": "^1.4.0"
