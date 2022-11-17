@@ -1,5 +1,4 @@
 ﻿import jQuery from 'jquery'
-import flowplayer from 'flowplayer'
 import 'flowplayer/dist/skin/skin.css'
 import './engine.cvh.css'
 (function ($) {
@@ -112,7 +111,7 @@ import './engine.cvh.css'
 
                     var actionFile = [path, chapter.actionFile].join('');
                     var videoFile = [path, chapter.videoFile].join('');
-
+                    
                     //Player Init event
                     flowplayer(function (api, root) {
                         me.player = { 'api': api, 'root': $(root) };
@@ -470,8 +469,8 @@ import './engine.cvh.css'
                         let h = $this.height(); //Player height
                         let ratio = me.player.api.conf.ratio;
 
-                        console.log('wa', me.actionBtnWidth);
-                        console.log('ha', me.actionBtnHeight);
+                        // console.log('wa', me.actionBtnWidth);
+                        // console.log('ha', me.actionBtnHeight);
 
                         //Adjust according to aspect ratio
                         let vw = Math.ceil(h / ratio); //Exact Width of video
@@ -554,15 +553,13 @@ import './engine.cvh.css'
         if (seconds === 0) { return $(this); }
         if ($(this).data('counter') && $(this).data('counter').stop) { $(this).data('counter').stop(); }
         var $this = $(this).data('counter', {});
-        var $bar = $($('.progress', $this)[0] || $this.append('<div class=""><div class="progress"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"><span class="sr-only"></span></div></div></div>'))
-            .find('.progress-bar')
-            .width('0%');
+        var $bar = $($('.progress', $this)[0] || $this.append('<progress id="progress" class="progress" value="0" max="100"></progress>').find('.progress'));
 
         $.extend($this.data('counter'), {
             delta: 10,
             duration: seconds * 1000,
             timer: 0,
-            bar: $bar,
+            $bar: $bar,
             handle: null,
             start: function () {
                 var me = this;
@@ -570,11 +567,12 @@ import './engine.cvh.css'
                     if (me.timer > me.duration) { me.stop(); $this.trigger('done'); return; }
                     me.timer += me.delta;
                     me.percent = (me.timer / me.duration * 100);
-                    if (me.percent <= 5) { $bar.removeClass('progress-bar-warning').removeClass('progress-bar-danger').addClass('progress-bar-success'); }
-                    if (me.percent > 75) { $bar.removeClass('progress-bar-success').addClass('progress-bar-warning'); }
-                    if (me.percent > 90) { $bar.removeClass('progress-bar-success').addClass('progress-bar-danger'); }
-                    //console.log(me.timer);
-                    me.bar.width(Math.round(me.percent) + '%');
+                    // if (me.percent <= 5) { me.$bar.removeClass('progress-bar-warning').removeClass('progress-bar-danger').addClass('progress-bar-success'); }
+                    // if (me.percent > 75) { me.$bar.removeClass('progress-bar-success').addClass('progress-bar-warning'); }
+                    // if (me.percent > 90) { me.$bar.removeClass('progress-bar-success').addClass('progress-bar-danger'); }
+                    
+                    me.$bar.attr('value', me.percent)
+                    //me.$bar.innerText = Math.round(me.percent) + '%';
                 }, me.delta);
 
                 return me;

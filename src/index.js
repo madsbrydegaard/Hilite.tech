@@ -1,4 +1,5 @@
 import jQuery from 'jquery'
+import './engine.cvh.js'
 import game from '../static/games/fck1/game.json'
 
 var gameid = 'fck';
