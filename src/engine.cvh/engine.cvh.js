@@ -1,4 +1,6 @@
-﻿import jQuery from 'jquery'
+﻿/* eslint-disable no-unused-vars */
+import flowplayer from 'flowplayer'
+import jQuery from 'jquery'
 import 'flowplayer/dist/skin/skin.css'
 import './engine.cvh.css'
 (function ($) {
@@ -370,7 +372,7 @@ import './engine.cvh.css'
                         //
 
                         $('<div class="curtain"/>').load(me.game.path + cuepoint.messageUrl, function () {
-                            $curtain = $(this);
+                            var $curtain = $(this);
                             $curtain.hide().appendTo($this).fadeIn(function () {
                                 $curtain.vcLoader().find('[data-dismiss]')
                                     .on('click', function (e) {
