@@ -8,11 +8,11 @@
           For optimal performance,
           <br />please go to horizontal mode
         </p>
-        <!-- <p class="subheading font-weight-regular" v-else-if="!isFullScreen">
+        <p class="subheading font-weight-regular" v-else-if="!isFullScreen">
           and,
           <br />
           <v-btn @click="requestFullscreen"> Enable fullscreen </v-btn>
-        </p> -->
+        </p>
         <p class="subheading font-weight-regular" v-else>
           <v-btn @click="$emit('togglePlay', true)"> Play game </v-btn>
         </p>
