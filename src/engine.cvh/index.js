@@ -8,7 +8,7 @@ var mode = '';
 var savedGame = null;
 
 var engine = () => {
-    jQuery('#cvh').on('game.resumed', function (e) {
+    return jQuery('#cvh').on('game.resumed', function (e) {
     }).on('game.paused', function (e, hasTimer) {
     }).on('chapter.started', function (e, engine, status) {
     }).on('game.ended', function (e, engine) {

@@ -1,13 +1,14 @@
 <template>
   <v-app>
     <v-main>
-      <PlayGame v-if="isPlaying" />
       <HelloWorld
-        v-else
-        @togglePlay="togglePlay"
-        @toggleFullscreen="toggleFullscreen"
-        @toggleHorizontal="toggleHorizontal"
+        v-if="status === 'initiating'"
+        @toggle-play="togglePlay"
+        @toggle-fullscreen="toggleFullscreen"
+        @toggle-horizontal="toggleHorizontal"
       />
+      <PlayGame v-if="status === 'playing'" @game-ended="gameEnded" />
+      <EndGame v-if="status === 'ended'" :result="result" />
     </v-main>
   </v-app>
 </template>
@@ -15,18 +16,22 @@
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import PlayGame from "./components/PlayGame.vue";
+import EndGame from "./components/EndGame.vue";
+
 export default {
   name: "App",
 
   components: {
     HelloWorld,
     PlayGame,
+    EndGame,
   },
 
   data: () => ({
     isFullscreen: false,
-    isPlaying: false,
+    status: "initiating",
     isHorizontal: false,
+    result: 0,
   }),
 
   methods: {
@@ -37,7 +42,11 @@ export default {
       this.isHorizontal = isHorizontal;
     },
     togglePlay(isPlaying) {
-      this.isPlaying = isPlaying;
+      this.status = isPlaying ? "playing" : "initiating";
+    },
+    gameEnded(engine) {
+      this.result = engine.score();
+      this.status = "ended";
     },
   },
 };
